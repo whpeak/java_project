@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class InsertSortDemo {
 
-    private List<Integer> disOrderList=CreateList.getLists(20);
+    private List<Integer> disOrderList=CreateList.getLists(5);
 
     public  void insertSort()
     {

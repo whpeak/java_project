@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class SelectSortDemo {
 
-    private List<Integer> disOrderList=CreateList.getLists(20);
+    private List<Integer> disOrderList=CreateList.getLists(5);
 
     public void selectSort()
     {
@@ -20,30 +20,33 @@ public class SelectSortDemo {
         int length=disOrderList.size();
         int temp;
         int index=0;
-        //i代表左边处理好了几个值，第二层循环从第i个开始往右边找
+        boolean isSwap ;
+        //i代表左边处理好了几个值，第二层循环从第i+1个开始往右边找,开始的时候,0个处理好
         for (int i=0;i<length;i++)
         {
             System.out.println("选择排序第"+(i+1)+"次：begin.........");
             temp=disOrderList.get(i);
-            for(int j=i;j<length-1;j++)
+            isSwap = false;
+            for(int j=i+1;j<length;j++)
             {
-                System.out.println("current temp num is: "+temp);
-                int currentNum=disOrderList.get(j+1);
-                System.out.println("current  deal num is: "+currentNum);
+                int currentNum=disOrderList.get(j);
+                System.out.println("current temp num is: "+temp+" current  deal num is: "+currentNum+". 开始比较");
                 if (temp>currentNum)
                 {
-                    System.out.println(">>>>>>>>>>>>temp num change from: "+temp+" to "+currentNum);
+                    isSwap = true;
+                    index=j;
+                    System.out.println(">>>>>>>>>>>>temp num change from: "+temp+" to "+currentNum+".temp num index is :"+index);
                     temp=currentNum;
-                    index=j+1;
-                    System.out.println("temp num index: "+index);
-
                 }
                 else
                 {
                     System.out.println(".......temp num need not change");
                 }
             }
-            swap(i,index);
+            if(isSwap)
+            {
+                swap(i,index);
+            }
             System.out.println("选择排序第"+(i+1)+"次：end........."+disOrderList);
         }
         System.out.println("the sort list is:");
