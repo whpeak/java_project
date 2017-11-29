@@ -21,8 +21,18 @@ public class CreateList {
         return lists;
     }
 
+    public static List<Integer> getLists()
+    {
+        lists.add(24);
+        lists.add(90);
+        lists.add(52);
+        lists.add(91);
+        lists.add(23);
+        return lists;
+    }
+
     public static void main(String[] args) {
-        List<Integer> lists=CreateList.getLists(20);
+        List<Integer> lists=CreateList.getLists();
         System.out.println(lists);
     }
 }
