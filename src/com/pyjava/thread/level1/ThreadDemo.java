@@ -55,7 +55,7 @@ class MyThreadTask implements Runnable
     public void run() {
         Thread currnetThread =Thread.currentThread();
         String threadName=currnetThread.getName();
-        while (1==1)
+        while (true)
         {
             System.out.println(threadName+ " say: hi man");
 //            currnetThread.yield();

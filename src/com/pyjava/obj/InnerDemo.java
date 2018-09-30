@@ -8,7 +8,7 @@ public class InnerDemo {
 
     private int num=5;
 
-    class Inner
+     class Inner
     {
         private  int innerNum=5555;
         public void say()
@@ -17,6 +17,8 @@ public class InnerDemo {
             System.out.println("i am a inner class");
             say1(121212222);
             getInnerDemo().say1(11111);
+            Inner c =Inner.this;
+            InnerDemo a=InnerDemo.this;
         }
     }
 
