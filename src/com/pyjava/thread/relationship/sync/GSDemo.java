@@ -27,13 +27,50 @@ public class GSDemo {
 		System.out.println("----------------------------------");
 		addThread.start();
 		subThread.start();
+		
+		
+		StatusTask statusTask = new StatusTask(addThread, subThread);
+		Thread statusThread = new Thread(statusTask, "statusThread");
+		
+		
+		statusThread.start();
 
 	}
-
+	
+	
 	public static void main(String[] args) throws InterruptedException {
 
 		new GSDemo().runThread();
 	}
+	
+	
+	
+	class StatusTask implements Runnable
+	{
+		private Thread addThread;
+		private Thread subThread;
+		StatusTask(Thread addThread,Thread subThread)
+		{
+			this.addThread = addThread;
+			this.subThread = subThread;
+		}
+		@Override
+		public void run() {
+			while(true)
+			{
+				try {
+					Thread.sleep(1000*1);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println(addThread.getName()+"------"+addThread.getState());
+				System.out.println(subThread.getName()+"------"+subThread.getState());
+			}
+			
+		}
+	}
+	
 
 	private static class LongNum {
 		private static long longNum = 10;
@@ -84,7 +121,7 @@ public class GSDemo {
 						System.out.println(
 								"完成加动作，累加数量：【" + addValue + "】临时数字为：【" + temp + "】临界 数字为：【" + LongNum.getLongNum());
 					}
-					Thread.sleep(1000 * 0);
+					Thread.sleep(1000 * 5);
 					System.out.println(thread.getName() + "准备唤醒减线程" + lock);
 					subCondition.signalAll(); //唤醒其他等待的线程，此时此刻，当前线程开不会释放锁，除非显示调用lock.unlock();
 					lock.unlock();
@@ -135,7 +172,7 @@ public class GSDemo {
 						System.out.println(
 								"完成减动作，累减数量：【" + subValue + "】临时数字为：【" + temp + "】临界数字为：【" + LongNum.getLongNum());
 					}
-					Thread.sleep(1000 * 0);
+					Thread.sleep(1000 * 5);
 					System.out.println(thread.getName() + "准备唤醒加线程" + lock);
 					addCondition.signalAll();
 					lock.unlock();
